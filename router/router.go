@@ -16,7 +16,7 @@ func Router() *gin.Engine {
 	// 路由组 user
 	user := r.Group("user")
 	{
-		user.GET("/userinfo", controller.UserController{}.GetUserInfo)
+		user.GET("/userinfo/:id/:name", controller.UserController{}.GetUserInfo)
 		user.GET("/userlist", controller.UserController{}.GetUserList)
 	}
 
