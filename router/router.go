@@ -16,7 +16,8 @@ func Router() *gin.Engine {
 	// 路由组v1
 	v1Group := r.Group("v1")
 	{
-		v1Group.GET("/", controller.GetUserInfo)
+		v1Group.GET("/user", controller.GetUserInfo)
+		v1Group.GET("/list", controller.GetUserList)
 	}
 	return r
 }
