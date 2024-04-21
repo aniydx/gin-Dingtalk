@@ -13,13 +13,18 @@ func Router() *gin.Engine {
 	//	c.JSON(http.StatusOK, gin.H{"code": 200, "msg": "GET / Success", "data": "index.html"})
 	//})
 
-	// 路由组v1
-	v1Group := r.Group("v1")
+	// 路由组 user
+	user := r.Group("user")
 	{
-		v1Group.GET("/userinfo", controller.UserController{}.GetUserInfo)
-		v1Group.GET("/userlist", controller.UserController{}.GetUserList)
-		v1Group.GET("/orderlist", controller.OrderController{}.GetUserList)
-		v1Group.GET("/orderinfo", controller.OrderController{}.GetUserInfo)
+		user.GET("/userinfo", controller.UserController{}.GetUserInfo)
+		user.GET("/userlist", controller.UserController{}.GetUserList)
+	}
+
+	// 路由组 order
+	order := r.Group("order")
+	{
+		order.GET("/orderlist", controller.OrderController{}.GetUserList)
+		order.GET("/orderinfo", controller.OrderController{}.GetUserInfo)
 	}
 	return r
 }
