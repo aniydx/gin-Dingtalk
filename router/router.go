@@ -31,6 +31,7 @@ func Router() *gin.Engine {
 	pay := r.Group("pay")
 	{
 		pay.POST("/paylist", controller.PayStruct{}.GetPayList)
+		pay.POST("/payinfo", controller.PayStruct{}.GetPayInfo)
 	}
 	return r
 }
