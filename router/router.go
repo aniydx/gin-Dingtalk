@@ -23,8 +23,14 @@ func Router() *gin.Engine {
 	// 路由组 order
 	order := r.Group("order")
 	{
-		order.GET("/orderlist", controller.OrderController{}.GetUserList)
-		order.GET("/orderinfo", controller.OrderController{}.GetUserInfo)
+		order.POST("/orderlist", controller.OrderController{}.GetOrderList)
+		order.GET("/orderinfo", controller.OrderController{}.GetOrderInfo)
+	}
+
+	// 路由组 pay
+	pay := r.Group("pay")
+	{
+		pay.POST("/paylist", controller.PayStruct{}.GetPayList)
 	}
 	return r
 }
