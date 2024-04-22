@@ -1,13 +1,20 @@
 package controller
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"goDingTalk/models"
+	"strconv"
+)
 
 type UserController struct{}
 
 func (u UserController) GetUserInfo(c *gin.Context) {
-	id := c.Param("id")
+	idStr := c.Param("id")
 	name := c.Param("name")
-	ReturnSuccess(c, 1, "user info", "GET Param id/name is: "+id+" "+name, 0)
+
+	id, _ := strconv.Atoi(idStr)
+	user, _ := models.GetUserTest(id)
+	ReturnSuccess(c, 1, name, user, 0)
 }
 
 func (u UserController) GetUserList(c *gin.Context) {

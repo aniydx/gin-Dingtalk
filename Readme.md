@@ -23,3 +23,12 @@ POST请求
         2、结构体方式
         定义一个结构跟传入的json数据一致, search := &Search{}, err := c.BindJSON(&search)
 ```
+
+```bash
+GORM
+  	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	
+	dao    层用于数据库连接的基础配置如连接: Db, err = gorm.Open("mysql", config.MysqlDB)
+	models 层用于数据的具体操作 insert delete update select
+```
