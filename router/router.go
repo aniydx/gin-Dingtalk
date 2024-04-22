@@ -20,6 +20,9 @@ func Router() *gin.Engine {
 		// router -> controller -> 具体的结构体方法(空结构体) -> common公共函数
 		user.GET("/userinfo/:id/:name", controller.UserController{}.GetUserInfo)
 		user.GET("/userlist", controller.UserController{}.GetUserList)
+		user.POST("/usercreate", controller.UserController{}.CreateUser)
+		user.POST("/userupdate", controller.UserController{}.UpdateUser)
+		user.POST("/userdelete", controller.UserController{}.DeleteUser)
 	}
 
 	// 路由组 order
