@@ -1,13 +1,13 @@
 main 中目前使用的结构方法来实现多个不同的接口的相同方法的调用
 
-```azure
+```bash
 GET请求
     /:id/:name
 代码中: 
     id := c.Param("id")
 ```
 
-```azure
+```bash
 POST请求
     第一种post form:
     header(Content-TypeL: application/x-www-form-urlencoded)
@@ -16,6 +16,7 @@ POST请求
     第二种post json(1、map方式 2、接收结构体):
     header(Content-TypeL: application/json)
     body({"cid": 10, "name": "abc"})
+        获取提交参数的方式:
         1、map方式
             param := make(map[string]interface{})
             err := c.BindJSON(&param)
