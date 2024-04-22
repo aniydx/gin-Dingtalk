@@ -23,6 +23,7 @@ func Router() *gin.Engine {
 		user.POST("/usercreate", controller.UserController{}.CreateUser)
 		user.POST("/userupdate", controller.UserController{}.UpdateUser)
 		user.POST("/userdelete", controller.UserController{}.DeleteUser)
+		user.POST("/list", controller.UserController{}.GetUserListTest)
 	}
 
 	// 路由组 order

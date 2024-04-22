@@ -2,9 +2,10 @@ package dao
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"goDingTalk/config"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"time"
 )
 
@@ -14,7 +15,9 @@ var (
 )
 
 func init() {
-	Db, err = gorm.Open("mysql", config.MysqlDB)
+	Db, err = gorm.Open(mysql.Open(config.MysqlDB), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info), // 设置日志级别为 Info，打印所有 SQL 语句
+	})
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -22,9 +25,15 @@ func init() {
 		fmt.Println(Db.Error.Error())
 	}
 
-	Db.LogMode(true) // 启用SQL日志记录
+	sqlDB, err := Db.DB()
+	if err != nil {
+		fmt.Println("mysql connect err is ", err.Error())
+	}
 
-	Db.DB().SetMaxIdleConns(10)
-	Db.DB().SetMaxOpenConns(100)
-	Db.DB().SetConnMaxLifetime(time.Hour)
+	// SetMaxIdleConns sets the maximum number of connections in the idle connection pool.
+	sqlDB.SetMaxIdleConns(10)
+	// SetMaxOpenConns sets the maximum number of open connections to the database.
+	sqlDB.SetMaxOpenConns(100)
+	// SetConnMaxLifetime sets the maximum amount of time a connection may be reused.
+	sqlDB.SetConnMaxLifetime(time.Hour)
 }

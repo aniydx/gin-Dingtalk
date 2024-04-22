@@ -55,3 +55,16 @@ func (u UserController) DeleteUser(c *gin.Context) {
 	}
 	ReturnSuccess(c, 200, "Delete msg success", student.Id, 10)
 }
+
+func (u UserController) GetUserListTest(c *gin.Context) {
+	student := models.User{}
+	err := c.ShouldBindJSON(&student)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	s, err := models.GetUserListTest(student.Id)
+	if err != nil {
+		ReturnError(c, 4004, err.Error())
+	}
+	ReturnSuccess(c, 200, "List User msg success", s, 10)
+}

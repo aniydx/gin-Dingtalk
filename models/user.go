@@ -35,3 +35,9 @@ func DeleteUserTest(id int) error {
 	err := dao.Db.Delete(&User{}, id).Error
 	return err
 }
+
+func GetUserListTest(id int) ([]User, error) {
+	var user []User
+	err := dao.Db.Where("id < ?", id).Find(&user).Error
+	return user, err
+}
